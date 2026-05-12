@@ -39,3 +39,52 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamster Clicker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="game-container">
+
+    <!-- LEFT SIDE SEEDS -->
+    <div class="left-panel">
+        <h2>🐹 Seeds</h2>
+        <h1 id="score">0</h1>
+        <p>Per Click: <span id="perClick">1</span></p>
+        <p>Per Second: <span id="perSecond">0</span></p>
+    </div>
+
+    <!-- CENTER GAME -->
+    <div class="center-panel">
+        <h1>Hamster Clicker</h1>
+        <img src="hamster.png" id="hamster" alt="Hamster">
+    </div>
+
+    <!-- SHOP -->
+    <div class="shop">
+        <h2>Upgrades</h2>
+
+        <button id="clickUpgradeBtn">
+            Bigger Hamster Paws (+1 per click)
+            <br>
+            Cost: <span id="clickCost">25</span>
+        </button>
+
+        <button id="autoUpgradeBtn">
+            Tiny Hamster Worker (+1 per second)
+            <br>
+            Cost: <span id="autoCost">50</span>
+        </button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
