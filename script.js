@@ -1,6 +1,3 @@
-// =====================
-// GAME STATE
-// =====================
 let score = 0;
 
 let perClick = 1;
@@ -11,9 +8,7 @@ let autoUpgradeCost = 50;
 
 let multiplier = 1;
 
-// =====================
-// ELEMENTS
-// =====================
+// ===== ELEMENTS =====
 const scoreEl = document.getElementById("score");
 const perClickEl = document.getElementById("perClick");
 const perSecondEl = document.getElementById("perSecond");
@@ -25,9 +20,7 @@ const dropZone = document.getElementById("dropZone");
 const clickBtn = document.getElementById("clickUpgradeBtn");
 const autoBtn = document.getElementById("autoUpgradeBtn");
 
-// =====================
-// UPDATE UI (IMPORTANT CORE FUNCTION)
-// =====================
+// ===== UI UPDATE =====
 function updateUI() {
     scoreEl.innerText = Math.floor(score);
     perClickEl.innerText = perClick;
@@ -39,14 +32,11 @@ function updateUI() {
     boostEl.innerText = multiplier + "x";
 }
 
-// =====================
-// CLICK HAMSTER
-// =====================
+// ===== CLICK =====
 hamster.addEventListener("click", (e) => {
     const gain = perClick * multiplier;
     score += gain;
 
-    // floating number
     const float = document.createElement("div");
     float.className = "floating-text";
     float.innerText = "+" + gain;
@@ -59,9 +49,7 @@ hamster.addEventListener("click", (e) => {
     updateUI();
 });
 
-// =====================
-// UPGRADE - CLICK
-// =====================
+// ===== UPGRADES (FIXED PROPERLY) =====
 clickBtn.addEventListener("click", () => {
     if (score >= clickUpgradeCost) {
         score -= clickUpgradeCost;
@@ -71,9 +59,6 @@ clickBtn.addEventListener("click", () => {
     }
 });
 
-// =====================
-// UPGRADE - AUTO
-// =====================
 autoBtn.addEventListener("click", () => {
     if (score >= autoUpgradeCost) {
         score -= autoUpgradeCost;
@@ -83,26 +68,20 @@ autoBtn.addEventListener("click", () => {
     }
 });
 
-// =====================
-// AUTO INCOME
-// =====================
+// ===== AUTO INCOME =====
 setInterval(() => {
     score += perSecond * multiplier;
     updateUI();
 }, 1000);
 
-// =====================
-// GOLDEN SEED (2% per second)
-// =====================
+// ===== GOLDEN SEED (2% per second) =====
 setInterval(() => {
     if (Math.random() < 0.02) {
         spawnGoldenSeed();
     }
 }, 1000);
 
-// =====================
-// SPAWN GOLDEN SEED
-// =====================
+// ===== SPAWN GOLDEN SEED =====
 function spawnGoldenSeed() {
     const seed = document.createElement("img");
     seed.src = "golden_seed.png";
@@ -118,9 +97,7 @@ function spawnGoldenSeed() {
     setTimeout(() => seed.remove(), 4000);
 }
 
-// =====================
-// BOOST (5x for 30s)
-// =====================
+// ===== BOOST =====
 function activateBoost(seed) {
     seed.remove();
 
@@ -133,7 +110,5 @@ function activateBoost(seed) {
     }, 30000);
 }
 
-// =====================
-// START
-// =====================
+// ===== START =====
 updateUI();
