@@ -1,3 +1,4 @@
+```js
 let score = 0;
 
 let perClick = 1;
@@ -49,7 +50,7 @@ hamster.addEventListener("click", (e) => {
     updateUI();
 });
 
-// ===== UPGRADES (FIXED PROPERLY) =====
+// ===== UPGRADES =====
 clickBtn.addEventListener("click", () => {
     if (score >= clickUpgradeCost) {
         score -= clickUpgradeCost;
@@ -87,14 +88,40 @@ function spawnGoldenSeed() {
     seed.src = "golden_seed.png";
     seed.className = "golden-seed";
 
+    // DOUBLE SIZE
+    seed.style.width = "120px";
+
+    // RANDOM POSITION
     seed.style.left = Math.random() * 300 + "px";
-    seed.style.top = "0px";
+
+    // START ABOVE SCREEN
+    seed.style.top = "-100px";
+
+    // SMOOTH SLOW FALL
+    seed.style.position = "absolute";
+    seed.style.transition = "top 6s linear";
+    seed.style.zIndex = "999";
 
     dropZone.appendChild(seed);
 
-    seed.onclick = () => activateBoost(seed);
+    // START FALLING
+    setTimeout(() => {
+        seed.style.top = "500px";
+    }, 50);
 
-    setTimeout(() => seed.remove(), 4000);
+    // CLICK GOLDEN SEED
+    seed.addEventListener("click", (e) => {
+
+        // PREVENT HAMSTER CLICK UNDERNEATH
+        e.stopPropagation();
+
+        activateBoost(seed);
+    });
+
+    // REMOVE AFTER FALL
+    setTimeout(() => {
+        seed.remove();
+    }, 6500);
 }
 
 // ===== BOOST =====
@@ -112,3 +139,4 @@ function activateBoost(seed) {
 
 // ===== START =====
 updateUI();
+```
