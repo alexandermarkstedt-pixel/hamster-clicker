@@ -1,0 +1,168 @@
+index.html
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamster Clicker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>🐹 Hamster Clicker</h1>
+
+        <div class="score-box">
+            <h2>Seeds: <span id="score">0</span></h2>
+            <p>Per Click: <span id="perClick">1</span></p>
+            <p>Per Second: <span id="perSecond">0</span></p>
+        </div>
+
+        <img src="hamster.png" id="hamster" alt="Hamster">
+
+        <div class="shop">
+            <h2>Upgrades</h2>
+
+            <button id="clickUpgradeBtn">
+                Bigger Hamster Paws (+1 per click)
+                <br>
+                Cost: <span id="clickCost">25</span>
+            </button>
+
+            <button id="autoUpgradeBtn">
+                Tiny Hamster Worker (+1 per second)
+                <br>
+                Cost: <span id="autoCost">50</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+style.css
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #f8d57e, #f5b971);
+    text-align: center;
+    color: #222;
+}
+
+.game-container {
+    padding: 20px;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+.score-box {
+    background: white;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#hamster {
+    width: 250px;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#hamster:active {
+    transform: scale(0.95);
+}
+
+.shop {
+    margin-top: 30px;
+}
+
+button {
+    display: block;
+    margin: 15px auto;
+    padding: 15px;
+    width: 300px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    background: #ffe6b3;
+}
+script.js
+  let score = 0;
+    perSecond = saveData.perSecond;
+    clickUpgradeCost = saveData.clickUpgradeCost;
+    autoUpgradeCost = saveData.autoUpgradeCost;
+}
+
+updateUI();
+
+// CLICK HAMSTER
+hamster.addEventListener("click", () => {
+    score += perClick;
+    updateUI();
+});
+
+// CLICK UPGRADE
+clickUpgradeBtn.addEventListener("click", () => {
+    if (score >= clickUpgradeCost) {
+        score -= clickUpgradeCost;
+
+        perClick += 1;
+
+        clickUpgradeCost = Math.floor(clickUpgradeCost * 1.5);
+
+        updateUI();
+    }
+});
+
+// AUTO UPGRADE
+autoUpgradeBtn.addEventListener("click", () => {
+    if (score >= autoUpgradeCost) {
+        score -= autoUpgradeCost;
+
+        perSecond += 1;
+
+        autoUpgradeCost = Math.floor(autoUpgradeCost * 1.7);
+
+        updateUI();
+    }
+});
+
+// AUTO GENERATION
+setInterval(() => {
+    score += perSecond;
+    updateUI();
+}, 1000);
+
+// SAVE GAME
+setInterval(() => {
+    localStorage.setItem("hamsterSave", JSON.stringify({
+        score,
+        perClick,
+        perSecond,
+        clickUpgradeCost,
+        autoUpgradeCost
+    }));
+}, 2000);
+
+function updateUI() {
+    scoreEl.textContent = Math.floor(score);
+    perClickEl.textContent = perClick;
+    perSecondEl.textContent = perSecond;
+
+    clickCostEl.textContent = clickUpgradeCost;
+    autoCostEl.textContent = autoUpgradeCost;
+}
+hamster.png
+  
