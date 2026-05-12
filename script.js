@@ -1,4 +1,4 @@
-```js
+```js id="h4m8qp"
 let score = 0;
 
 let perClick = 1;
@@ -20,6 +20,21 @@ const dropZone = document.getElementById("dropZone");
 
 const clickBtn = document.getElementById("clickUpgradeBtn");
 const autoBtn = document.getElementById("autoUpgradeBtn");
+
+// ===== BOOST TIMER TEXT =====
+const boostTimer = document.createElement("div");
+boostTimer.style.position = "absolute";
+boostTimer.style.top = "10px";
+boostTimer.style.left = "50%";
+boostTimer.style.transform = "translateX(-50%)";
+boostTimer.style.fontSize = "28px";
+boostTimer.style.fontWeight = "bold";
+boostTimer.style.color = "gold";
+boostTimer.style.textShadow = "2px 2px 5px black";
+boostTimer.style.zIndex = "2000";
+boostTimer.innerText = "";
+
+document.body.appendChild(boostTimer);
 
 // ===== UI UPDATE =====
 function updateUI() {
@@ -131,10 +146,24 @@ function activateBoost(seed) {
     multiplier = 5;
     updateUI();
 
-    setTimeout(() => {
-        multiplier = 1;
-        updateUI();
-    }, 30000);
+    let timeLeft = 10;
+
+    boostTimer.innerText = "Golden Seed: " + timeLeft + " secs";
+
+    const countdown = setInterval(() => {
+        timeLeft--;
+
+        boostTimer.innerText = "Golden Seed: " + timeLeft + " secs";
+
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+
+            multiplier = 1;
+            boostTimer.innerText = "";
+
+            updateUI();
+        }
+    }, 1000);
 }
 
 // ===== START =====
