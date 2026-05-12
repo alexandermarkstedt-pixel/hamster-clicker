@@ -1,55 +1,55 @@
-let score = 0;
-    float.style.left = e.offsetX + "px";
-    float.style.top = e.offsetY + "px";
-
-    dropZone.appendChild(float);
-    setTimeout(() => float.remove(), 1000);
-
-    updateUI();
-});
-
-// AUTO
-setInterval(() => {
-    score += perSecond * boost;
-    updateUI();
-}, 1000);
-
-// GOLDEN SEED SPAWN (2% per second)
-setInterval(() => {
-    if (Math.random() < 0.02) spawnGoldenSeed();
-}, 1000);
-
-function spawnGoldenSeed() {
-    const seed = document.createElement("img");
-    seed.src = "golden_seed.png";
-    seed.className = "golden-seed";
-
-    seed.style.left = Math.random() * 300 + "px";
-    seed.style.top = "0px";
-
-    seed.onclick = () => activateBoost(seed);
-
-    dropZone.appendChild(seed);
-
-    setTimeout(() => seed.remove(), 4000);
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(to bottom right, #f8d57e, #f5b971);
 }
 
-function activateBoost(seed) {
-    seed.remove();
-
-    boost = 5;
-    boostActive = true;
-    boostEl.innerText = "5x";
-
-    setTimeout(() => {
-        boost = 1;
-        boostEl.innerText = "1x";
-        boostActive = false;
-    }, 30000);
+.game-container {
+    display: flex;
+    height: 100vh;
 }
 
-function updateUI() {
-    scoreEl.innerText = Math.floor(score);
-    perClickEl.innerText = perClick;
-    perSecondEl.innerText = perSecond;
+.left-panel {
+    width: 20%;
+    background: white;
+    padding: 20px;
+}
+
+.center-panel {
+    width: 50%;
+    text-align: center;
+    position: relative;
+}
+
+#hamster {
+    width: 420px;
+    cursor: pointer;
+}
+
+.shop {
+    width: 30%;
+    padding: 20px;
+}
+
+.floating-text {
+    position: absolute;
+    animation: floatUp 1s forwards;
+    font-weight: bold;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-80px); opacity: 0; }
+}
+
+.golden-seed {
+    position: absolute;
+    width: 60px;
+    cursor: pointer;
+    animation: fall 3s linear;
+}
+
+@keyframes fall {
+    from { transform: translateY(-100px); }
+    to { transform: translateY(400px); }
 }
