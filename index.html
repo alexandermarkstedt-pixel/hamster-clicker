@@ -10,35 +10,26 @@
 
 <div class="game-container">
 
-    <!-- LEFT SIDE SEEDS -->
     <div class="left-panel">
         <h2>🐹 Seeds</h2>
         <h1 id="score">0</h1>
         <p>Per Click: <span id="perClick">1</span></p>
         <p>Per Second: <span id="perSecond">0</span></p>
+        <p>Boost: <span id="boost">1x</span></p>
     </div>
 
-    <!-- CENTER GAME -->
     <div class="center-panel">
         <h1>Hamster Clicker</h1>
-        <img src="hamster.png" id="hamster" alt="Hamster">
+        <img src="hamster.png" id="hamster">
+        <div id="dropZone"></div>
     </div>
 
-    <!-- SHOP -->
     <div class="shop">
         <h2>Upgrades</h2>
 
-        <button id="clickUpgradeBtn">
-            Bigger Hamster Paws (+1 per click)
-            <br>
-            Cost: <span id="clickCost">25</span>
-        </button>
+        <button id="clickUpgradeBtn">+1 per click<br>Cost: 25</button>
+        <button id="autoUpgradeBtn">+1 per second<br>Cost: 50</button>
 
-        <button id="autoUpgradeBtn">
-            Tiny Hamster Worker (+1 per second)
-            <br>
-            Cost: <span id="autoCost">50</span>
-        </button>
     </div>
 
 </div>
