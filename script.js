@@ -1,5 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-
 let score = 0;
 let perClick = 1;
 let perSecond = 0;
@@ -11,36 +9,31 @@ const scoreEl = document.getElementById("score");
 const perClickEl = document.getElementById("perClick");
 const perSecondEl = document.getElementById("perSecond");
 
-const hamster = document.getElementById("hamster");
-
-const clickUpgradeBtn = document.getElementById("clickUpgradeBtn");
-const autoUpgradeBtn = document.getElementById("autoUpgradeBtn");
-
 const clickCostEl = document.getElementById("clickCost");
 const autoCostEl = document.getElementById("autoCost");
 
-// CLICK HAMSTER
-hamster.addEventListener("click", (e) => {
-    score += perClick;
+const hamster = document.getElementById("hamster");
 
+// CLICK
+hamster.addEventListener("click", () => {
+    score = score + perClick;
     updateUI();
 });
 
-// CLICK UPGRADE
-clickUpgradeBtn.addEventListener("click", () => {
+// UPGRADES
+document.getElementById("clickUpgradeBtn").addEventListener("click", () => {
     if (score >= clickUpgradeCost) {
         score -= clickUpgradeCost;
-        perClick++;
+        perClick += 1;
         clickUpgradeCost = Math.floor(clickUpgradeCost * 1.5);
         updateUI();
     }
 });
 
-// AUTO UPGRADE
-autoUpgradeBtn.addEventListener("click", () => {
+document.getElementById("autoUpgradeBtn").addEventListener("click", () => {
     if (score >= autoUpgradeCost) {
         score -= autoUpgradeCost;
-        perSecond++;
+        perSecond += 1;
         autoUpgradeCost = Math.floor(autoUpgradeCost * 1.7);
         updateUI();
     }
@@ -52,15 +45,15 @@ setInterval(() => {
     updateUI();
 }, 1000);
 
+// UPDATE UI
 function updateUI() {
-    scoreEl.textContent = Math.floor(score);
-    perClickEl.textContent = perClick;
-    perSecondEl.textContent = perSecond;
+    scoreEl.innerText = score;
+    perClickEl.innerText = perClick;
+    perSecondEl.innerText = perSecond;
 
-    clickCostEl.textContent = clickUpgradeCost;
-    autoCostEl.textContent = autoUpgradeCost;
+    clickCostEl.innerText = clickUpgradeCost;
+    autoCostEl.innerText = autoUpgradeCost;
 }
 
+// FIRST LOAD
 updateUI();
-
-});
