@@ -1,59 +1,99 @@
+/* ===== GENERAL ===== */
 body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #f8d57e, #f5b971);
+    overflow: hidden;
 }
 
+/* ===== MAIN LAYOUT ===== */
 .game-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     height: 100vh;
-    padding: 20px;
 }
 
+/* ===== LEFT PANEL (SEEDS) ===== */
 .left-panel {
     width: 20%;
-    text-align: left;
-    background: white;
+    background: rgba(255, 255, 255, 0.9);
     padding: 20px;
-    border-radius: 12px;
+    box-sizing: border-box;
+    text-align: left;
+    border-right: 2px solid rgba(0,0,0,0.1);
 }
 
+.left-panel h1 {
+    font-size: 48px;
+    margin: 10px 0;
+}
+
+/* ===== CENTER PANEL ===== */
 .center-panel {
     width: 50%;
     text-align: center;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
+/* HAMSTER IMAGE */
 #hamster {
-    width: 400px;
+    width: 450px;
     cursor: pointer;
-    transition: transform 0.1s;
+    transition: transform 0.1s ease;
+    user-select: none;
 }
 
 #hamster:active {
     transform: scale(0.95);
 }
 
+/* DROP ZONE (floating numbers + golden seeds) */
+#dropZone {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+/* ===== SHOP ===== */
 .shop {
-    width: 25%;
-    text-align: center;
+    width: 30%;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    box-sizing: border-box;
+    border-left: 2px solid rgba(0,0,0,0.1);
 }
 
-button {
-    margin: 10px;
+.shop button {
+    width: 100%;
     padding: 15px;
-    width: 90%;
-    border-radius: 10px;
+    margin: 10px 0;
+    font-size: 16px;
     border: none;
+    border-radius: 10px;
     cursor: pointer;
+    background: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    transition: 0.2s;
 }
 
+.shop button:hover {
+    transform: translateY(-2px);
+    background: #ffe7a3;
+}
+
+/* ===== FLOATING CLICK TEXT ===== */
 .floating-text {
     position: absolute;
     font-size: 20px;
     font-weight: bold;
-    color: black;
-    animation: floatUp 1s ease-out forwards;
-    pointer-events: none;
+    color: #000;
+    animation: floatUp 1s forwards;
 }
 
 @keyframes floatUp {
@@ -64,5 +104,23 @@ button {
     100% {
         opacity: 0;
         transform: translateY(-80px);
+    }
+}
+
+/* ===== GOLDEN SEED ===== */
+.golden-seed {
+    position: absolute;
+    width: 60px;
+    cursor: pointer;
+    animation: fall 3s linear forwards;
+    pointer-events: auto;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(-100px);
+    }
+    to {
+        transform: translateY(600px);
     }
 }
