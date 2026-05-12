@@ -1,59 +1,55 @@
 let score = 0;
-let perClick = 1;
-let perSecond = 0;
+    float.style.left = e.offsetX + "px";
+    float.style.top = e.offsetY + "px";
 
-let clickUpgradeCost = 25;
-let autoUpgradeCost = 50;
+    dropZone.appendChild(float);
+    setTimeout(() => float.remove(), 1000);
 
-const scoreEl = document.getElementById("score");
-const perClickEl = document.getElementById("perClick");
-const perSecondEl = document.getElementById("perSecond");
-
-const clickCostEl = document.getElementById("clickCost");
-const autoCostEl = document.getElementById("autoCost");
-
-const hamster = document.getElementById("hamster");
-
-// CLICK
-hamster.addEventListener("click", () => {
-    score = score + perClick;
     updateUI();
 });
 
-// UPGRADES
-document.getElementById("clickUpgradeBtn").addEventListener("click", () => {
-    if (score >= clickUpgradeCost) {
-        score -= clickUpgradeCost;
-        perClick += 1;
-        clickUpgradeCost = Math.floor(clickUpgradeCost * 1.5);
-        updateUI();
-    }
-});
-
-document.getElementById("autoUpgradeBtn").addEventListener("click", () => {
-    if (score >= autoUpgradeCost) {
-        score -= autoUpgradeCost;
-        perSecond += 1;
-        autoUpgradeCost = Math.floor(autoUpgradeCost * 1.7);
-        updateUI();
-    }
-});
-
-// AUTO INCOME
+// AUTO
 setInterval(() => {
-    score += perSecond;
+    score += perSecond * boost;
     updateUI();
 }, 1000);
 
-// UPDATE UI
-function updateUI() {
-    scoreEl.innerText = score;
-    perClickEl.innerText = perClick;
-    perSecondEl.innerText = perSecond;
+// GOLDEN SEED SPAWN (2% per second)
+setInterval(() => {
+    if (Math.random() < 0.02) spawnGoldenSeed();
+}, 1000);
 
-    clickCostEl.innerText = clickUpgradeCost;
-    autoCostEl.innerText = autoUpgradeCost;
+function spawnGoldenSeed() {
+    const seed = document.createElement("img");
+    seed.src = "golden_seed.png";
+    seed.className = "golden-seed";
+
+    seed.style.left = Math.random() * 300 + "px";
+    seed.style.top = "0px";
+
+    seed.onclick = () => activateBoost(seed);
+
+    dropZone.appendChild(seed);
+
+    setTimeout(() => seed.remove(), 4000);
 }
 
-// FIRST LOAD
-updateUI();
+function activateBoost(seed) {
+    seed.remove();
+
+    boost = 5;
+    boostActive = true;
+    boostEl.innerText = "5x";
+
+    setTimeout(() => {
+        boost = 1;
+        boostEl.innerText = "1x";
+        boostActive = false;
+    }, 30000);
+}
+
+function updateUI() {
+    scoreEl.innerText = Math.floor(score);
+    perClickEl.innerText = perClick;
+    perSecondEl.innerText = perSecond;
+}
