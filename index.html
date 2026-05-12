@@ -6,25 +6,36 @@
     <title>Hamster Clicker</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="game-container">
 
+    <!-- LEFT SIDE -->
     <div class="left-panel">
         <h2>🐹 Seeds</h2>
         <h1 id="score">0</h1>
+
         <p>Per Click: <span id="perClick">1</span></p>
         <p>Per Second: <span id="perSecond">0</span></p>
         <p>Boost: <span id="boost">1x</span></p>
     </div>
 
+    <!-- CENTER -->
     <div class="center-panel">
+
         <h1>Hamster Clicker</h1>
-        <img src="hamster.png" id="hamster">
+
+        <img src="hamster.png" id="hamster" alt="Hamster">
+
+        <!-- IMPORTANT: this is where floating numbers + golden seeds appear -->
         <div id="dropZone"></div>
+
     </div>
 
+    <!-- SHOP -->
     <div class="shop">
+
         <h2>Upgrades</h2>
 
         <button id="clickUpgradeBtn">+1 per click<br>Cost: 25</button>
@@ -35,5 +46,6 @@
 </div>
 
 <script src="script.js"></script>
+
 </body>
 </html>
