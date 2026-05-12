@@ -1,4 +1,3 @@
-```js id="n5r8tc"
 let score = 0;
 
 let perClick = 1;
@@ -243,4 +242,3 @@ function activateBoost(seed) {
 
 // ===== START =====
 updateUI();
-```
