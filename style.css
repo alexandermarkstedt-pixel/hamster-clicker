@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #f8d57e, #f5b971);
+    text-align: center;
+    color: #222;
+}
+
+.game-container {
+    padding: 20px;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+.score-box {
+    background: white;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#hamster {
+    width: 250px;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#hamster:active {
+    transform: scale(0.95);
+}
+
+.shop {
+    margin-top: 30px;
+}
+
+button {
+    display: block;
+    margin: 15px auto;
+    padding: 15px;
+    width: 300px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    background: #ffe6b3;
+}
