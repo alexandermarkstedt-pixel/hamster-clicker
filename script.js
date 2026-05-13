@@ -216,6 +216,16 @@ function saveGame() {
         prestigeMultiplier: prestigeMultiplier
     };
     localStorage.setItem("hamsterClickerSave", JSON.stringify(saveData));
+    showSaveNotice();
+}
+
+function showSaveNotice() {
+    const notice = document.getElementById("saveNotice");
+    notice.style.opacity = "1";
+    clearTimeout(notice._fadeTimer);
+    notice._fadeTimer = setTimeout(() => {
+        notice.style.opacity = "0";
+    }, 1500);
 }
 
 function loadGame() {
