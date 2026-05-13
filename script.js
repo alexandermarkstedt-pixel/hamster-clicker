@@ -167,3 +167,35 @@ function activateBoost(seed) {
 
 // ===== START =====
 updateUI();
+// ===== SAVE & LOAD =====
+function saveGame() {
+    const saveData = {
+        score: score,
+        perClick: perClick,
+        perSecond: perSecond,
+        clickUpgradeCost: clickUpgradeCost,
+        autoUpgradeCost: autoUpgradeCost,
+        megaUpgradeCost: megaUpgradeCost,
+        prestigeLevel: prestigeLevel,
+        prestigeMultiplier: prestigeMultiplier
+    };
+    localStorage.setItem("hamsterClickerSave", JSON.stringify(saveData));
+}
+function loadGame() {
+    const saved = localStorage.getItem("hamsterClickerSave");
+    if (!saved) return;
+    const data = JSON.parse(saved);
+    score = data.score || 0;
+    perClick = data.perClick || 1;
+    perSecond = data.perSecond || 0;
+    clickUpgradeCost = data.clickUpgradeCost || 25;
+    autoUpgradeCost = data.autoUpgradeCost || 50;
+    megaUpgradeCost = data.megaUpgradeCost || 500;
+    prestigeLevel = data.prestigeLevel || 0;
+    prestigeMultiplier = data.prestigeMultiplier || 1;
+    updateUI();
+}
+// Auto-save every 10 seconds
+setInterval(saveGame, 10000);
+// Load on startup
+loadGame();
