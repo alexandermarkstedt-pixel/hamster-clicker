@@ -173,10 +173,11 @@ function spawnGoldenSeed() {
 
     setTimeout(() => { seed.style.top = "500px"; }, 50);
 
-    seed.addEventListener("click", (e) => {
-        e.stopPropagation();
-        activateBoost(seed);
-    });
+  // NEW - use this instead:
+seed.addEventListener("pointerdown", (e) => {
+    e.stopPropagation();
+    activateBoost(seed);
+});
 
     setTimeout(() => { seed.remove(); }, 6500);
 }
